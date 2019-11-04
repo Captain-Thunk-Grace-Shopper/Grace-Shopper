@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "captain-thunk-grace-shopper",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "An online shopping website for groceries!",
   "engines": {
     "node": ">= 7.0.0"
   },
