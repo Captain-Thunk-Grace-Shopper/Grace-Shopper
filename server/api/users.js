@@ -16,3 +16,15 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+//FINDS USER ORDERS BASED ON USER ID
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const order = await Order.findAll({
+      where: {userId: req.params.userId}
+    })
+    res.json(order)
+  } catch (error) {
+    next(error)
+  }
+})
