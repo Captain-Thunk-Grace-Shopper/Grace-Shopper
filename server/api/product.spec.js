@@ -34,5 +34,16 @@ describe('Product routes', () => {
       expect(res.body[0].price).to.be.equal(productPrice.toString())
       expect(res.body[0].category).to.be.equal(productCategory)
     })
-  }) // end describe('/api/users')
-}) // end describe('User routes')
+
+    it('GET /api/products/:productId', async () => {
+      const res = await request(app)
+        .get('/api/products/1')
+        .expect(200)
+
+      expect(res.body).to.be.an('object')
+      expect(res.body.name).to.be.equal(productName)
+      expect(res.body.price).to.be.equal(productPrice.toString())
+      expect(res.body.category).to.be.equal(productCategory)
+    })
+  }) // end describe('/api/products')
+}) // end describe('Product routes')
