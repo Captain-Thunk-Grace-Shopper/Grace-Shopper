@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import Products from './Products'
+import Cart from './cart'
 
 class Home extends React.Component {
   componentDidMount() {
@@ -15,6 +16,9 @@ class Home extends React.Component {
           {this.props.products.map((products, idx) => (
             <Products key={idx} products={products} />
           ))}
+        </div>
+        <div>
+          <Cart />
         </div>
       </main>
     )
