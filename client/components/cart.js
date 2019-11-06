@@ -1,27 +1,58 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import getCartThunkCreator from '../store/cart'
+import {getOrders} from '../store/orders'
 import CartItem from './cartItem'
 
 class Cart extends React.Component {
   componentDidMount() {
-    this.props.getCart()
+    console.log('cart component mounted')
+    this.props.getOrders()
   }
+
   render() {
-    return this.props.cart.map(item => {
-      return <CartItem item={item} key={item.id} />
+    //if there are no carts
+    if (!Array.isArray(this.props.orders)) {
+      return <h1>Start a cart</h1>
+    }
+    //otherwise find the most recent open cart (aka created cart)
+    let openCart = {}
+    this.props.orders.forEach(order => {
+      if (order.status === 'Created') {
+        openCart = order
+      }
     })
+    //if there are no open carts
+    if (!openCart.name) {
+      return <h1>Start a cart!</h1>
+    }
+    console.log('openCart:', openCart['order-items'])
+    return (
+      <main>
+        <div>
+          <h1>This is your cart</h1>
+          {openCart['order-items'].map((item, idx) => (
+            <CartItem
+              idx={idx}
+              key={[item.orderId, item.productId]}
+              item={item}
+            />
+          ))}
+        </div>
+      </main>
+    )
   }
 }
 
 const mapStateToProps = state => {
-  return {cart: state.cart}
+  console.log('mapping state to props', state.orders)
+  return {orders: state.orders}
 }
 
 const mapDispatchToProps = dispatch => {
+  console.log('mapping dispatch to props')
   return {
-    getCart: () => {
-      dispatch(getCartThunkCreator())
+    getOrders: () => {
+      dispatch(getOrders())
     }
   }
 }

@@ -1,10 +1,15 @@
 import React from 'react'
 
 function CartItem(props) {
+  console.log('cart info', props.item)
+  const cartItem = props.item
+  const num = props.idx + 1
   return (
-    <h1>
-      {props.item.name} {props.item.price}{' '}
-    </h1>
+    <main>
+      <h2>
+        Item {num}: {cartItem.quantity}
+      </h2>
+    </main>
   )
 }
 
