@@ -3,6 +3,7 @@
 const db = require('../server/db')
 const {User} = require('../server/db/models')
 const {Product} = require('../server/db/models')
+const {Order} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -56,11 +57,99 @@ async function seed() {
       category: 'Bakery',
       imgUrl:
         'https://joyfoodsunshine.com/wp-content/uploads/2016/01/best-chocolate-chip-cookies-recipe-ever-no-chilling-1-500x500.jpg'
+    }),
+    Product.create({
+      name: 'Watermelon',
+      description: 'Seasonal',
+      price: 3.99,
+      inventory: 50,
+      category: 'Fruit',
+      imgUrl:
+        'https://snaped.fns.usda.gov/sites/default/files/styles/crop_ratio_7_5/public/seasonal-produce/2018-05/watermelon.jpg?itok=6EdNOdUo'
+    }),
+    Product.create({
+      name: 'Broccoli',
+      description: 'Fresh',
+      price: 2.99,
+      inventory: 50,
+      category: 'Vegetables',
+      imgUrl:
+        'https://www.health.harvard.edu/media/content/images/p7_Broccoli_HH1812_gi905351392.jpg'
+    }),
+    Product.create({
+      name: 'Eggs',
+      description: 'Organic and cage free',
+      price: 1.29,
+      inventory: 50,
+      category: 'Meat & Poultry',
+      imgUrl:
+        'https://twohealthykitchens.com/wp-content/uploads/2015/10/THK-Egg-Facts51.jpg'
+    }),
+    Product.create({
+      name: 'Pinot Noir',
+      description: 'Cloudline Oregon',
+      price: 19.99,
+      inventory: 10,
+      category: 'Beer & Wine',
+      imgUrl:
+        'https://www.haskells.com/media/catalog/product/cache/1/image/816x1200/040ec09b1e35df139433887a97daa66f/5/1/510056_0_1_1.jpg'
+    }),
+    Product.create({
+      name: 'Ice Tea',
+      description: 'Unsweetened, Glass Bottle',
+      price: 2.99,
+      inventory: 50,
+      category: 'Beverages',
+      imgUrl:
+        'https://www.german-design-award.com/fileadmin/GDA/gallery/2016/99023/productimage_large.jpg'
+    }),
+    Product.create({
+      name: 'Shrimp',
+      description: 'All-Natural Wild Domestic shrimp',
+      price: 24.99,
+      inventory: 50,
+      category: 'SeaFood',
+      imgUrl:
+        'https://static.wixstatic.com/media/0ff79f_a8d231df61e445a794cf29110d58d159.jpg/v1/fill/w_532,h_532,al_c,lg_1,q_85/0ff79f_a8d231df61e445a794cf29110d58d159.jpg'
+    })
+  ])
+
+  const orders = await Promise.all([
+    Order.create({
+      status: 'Created',
+      address: '5 Hanover Square',
+      name: 'Wesam'
+    }),
+    Order.create({
+      status: 'Submitted',
+      address: '150 Broadway',
+      name: 'Katherine'
+    }),
+    Order.create({
+      status: 'Complete',
+      address: '200 Broad st',
+      name: 'Tani'
+    }),
+    Order.create({
+      status: 'Created',
+      address: '100 Hamilton pkway',
+      name: 'Cody'
+    }),
+    Order.create({
+      status: 'Submitted',
+      address: '345 Beaver st',
+      name: 'Ada'
+    }),
+    Order.create({
+      status: 'Complete',
+      address: '876 Water st',
+      name: 'Alan'
     })
   ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
+  console.log(`seeded ${orders.length} orders`)
   console.log(`seeded successfully`)
 }
 
