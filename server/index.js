@@ -57,9 +57,22 @@ const createApp = () => {
       secret: process.env.SESSION_SECRET || 'my best friend is Cody',
       store: sessionStore,
       resave: false,
-      saveUninitialized: false
+      saveUninitialized: true
     })
   )
+
+  app.use((req, res, next) => {
+    if (!req.session.order) req.session.order = []
+
+    console.log('order', req.session.order) // increment THEN log
+    next() // needed to continue through express middleware
+  })
+
+  app.use((req, res, next) => {
+    console.log('SESSION: ', req.session)
+    next()
+  })
+
   app.use(passport.initialize())
   app.use(passport.session())
 
