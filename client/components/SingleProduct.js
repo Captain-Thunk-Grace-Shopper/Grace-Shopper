@@ -9,16 +9,20 @@ class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.getSingleProduct(this.props.paramId)
   }
+  addToCart() {}
   render() {
     const product = this.props.product
     return (
       <main>
         <div>
           <h2>{product.name}</h2>
-          <img src={product.imgUrl} />
+          <img height="200px" width="200px" src={product.imgUrl} />
           <h3>Description:</h3>
           <p>{product.description}</p>
           <h4>Price:{product.price}</h4>
+          <button type="button" onClick={this.addToCart}>
+            Add to cart
+          </button>
         </div>
       </main>
     )

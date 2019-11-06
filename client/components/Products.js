@@ -7,6 +7,9 @@ const Products = props => {
       <Link to={`/products/${props.products.id}`}>
         <h5>{props.products.name}</h5>
       </Link>
+      <button type="button" onClick={props.addToCart}>
+        Add to cart
+      </button>
       <img height="100px" width="100px" src={props.products.imgUrl} />
     </div>
   )
