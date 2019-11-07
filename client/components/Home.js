@@ -10,17 +10,19 @@ class Home extends React.Component {
   }
   render() {
     return (
-      <main>
-        <div>
-          <h2>SuperMarket</h2>
-          {this.props.products.map((products, idx) => (
-            <Products key={idx} products={products} />
-          ))}
+      <div>
+        <h2>SuperMarket</h2>
+        <div id="groceries-container">
+          <ul className="grocery-list">
+            {this.props.products.map(product => (
+              <li key={product.id} className="grocery-item">
+                <Products products={product} />
+              </li>
+            ))}
+          </ul>
         </div>
-        <div>
-          <Cart />
-        </div>
-      </main>
+        <Cart />
+      </div>
     )
   }
 }
