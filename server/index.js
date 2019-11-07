@@ -61,10 +61,11 @@ const createApp = () => {
     })
   )
 
+  app.use(passport.initialize())
+  app.use(passport.session())
+
   app.use((req, res, next) => {
     if (!req.session.order) req.session.order = []
-
-    console.log('order', req.session.order) // increment THEN log
     next() // needed to continue through express middleware
   })
 
@@ -72,9 +73,6 @@ const createApp = () => {
     console.log('SESSION: ', req.session)
     next()
   })
-
-  app.use(passport.initialize())
-  app.use(passport.session())
 
   // auth and api routes
   app.use('/auth', require('./auth'))
