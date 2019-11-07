@@ -28,3 +28,14 @@ router.get('/:userId', async (req, res, next) => {
     next(error)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  console.log('hello')
+  try {
+    const address = await User.create(req.body)
+
+    res.status(201).json(address)
+  } catch (error) {
+    next(error)
+  }
+})
