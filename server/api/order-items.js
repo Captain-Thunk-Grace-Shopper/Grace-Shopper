@@ -3,13 +3,25 @@ const {OrderItem} = require('../db/models')
 const {Product} = require('../db/models')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+//find all ORDER ITEMS in an order
+// router.get('/:orderId', async (req, res, next) => {
+//   try {
+//     const items = await OrderItem.findAll()
+//     res.json(items)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
+router.get('/:orderId', async (req, res, next) => {
   try {
     const items = await OrderItem.findAll({
-      attributes: ['quantity', 'orderId', 'productId']
+      where: {
+        id: req.params.orderId
+      }
     })
     res.json(items)
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    next(error)
   }
 })

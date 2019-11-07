@@ -23,20 +23,20 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-// //GET ORDERS FOR SPECIFIC USER OR GUEST
-// router.get('/user', async (req, res, next) => {
-//   try {
-//     if (req.session.passport) {
-//       const orders = await Order.findAll({
-//         where: {userId: req.session.passport.user},
-//         include: [{model: OrderItem}]
-//       })
-//       res.json(orders)
-//     } else {
-//       // res.send(req.session.order)
-//       res.send(req.session)
-//     }
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+//GET ORDERS FOR SPECIFIC USER OR GUEST
+router.get('/user', async (req, res, next) => {
+  try {
+    if (req.session.passport) {
+      const orders = await Order.findAll({
+        where: {userId: req.session.passport.user},
+        include: [{model: OrderItem}]
+      })
+      res.json(orders)
+    } else {
+      // res.send(req.session.order)
+      res.send(req.session)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
