@@ -17,12 +17,11 @@ const OrderItem = require('./order-item')
  * instead of: const User = require('../db/models/user')
  */
 
+User.hasMany(Order)
 Order.belongsTo(User)
 Order.hasMany(OrderItem)
-
-User.hasMany(Order)
-
 Product.belongsToMany(Order, {through: OrderItem})
+Order.belongsToMany(Product, {through: OrderItem})
 
 module.exports = {
   User,

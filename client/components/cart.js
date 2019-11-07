@@ -1,26 +1,24 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getOpenCart} from '../store/orders'
+import {getOpenOrder} from '../store/orders'
 import CartItem from './cartItem'
 
 class Cart extends React.Component {
   componentDidMount() {
-    console.log('cart component mounted')
-    this.props.getOpenCart()
+    this.props.getOpenOrder()
   }
 
   render() {
-    const openCart = this.props.openCart[0]
+    const openOrder = this.props.openOrder
     //if there are no carts
-    if (!openCart) {
-      return <h1>Start a cart</h1>
+    if (!openOrder.length) {
+      return <h1>Add an item to start a cart</h1>
     }
-    console.log('openCart:', openCart['order-items'])
     return (
       <main>
         <div>
-          <h1>This is your cart</h1>
-          {openCart['order-items'].map((item, idx) => (
+          <h1>Your cart:</h1>
+          {openOrder.map((item, idx) => (
             <CartItem
               idx={idx}
               key={[item.orderId, item.productId]}
@@ -34,15 +32,14 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('mapping state to props', state.orders)
-  return {openCart: state.orders}
+  console.log('mapping cart state to props', state.orders)
+  return {openOrder: state.orders}
 }
 
 const mapDispatchToProps = dispatch => {
-  console.log('mapping dispatch to props')
   return {
-    getOpenCart: () => {
-      dispatch(getOpenCart())
+    getOpenOrder: () => {
+      dispatch(getOpenOrder())
     }
   }
 }
