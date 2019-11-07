@@ -22,7 +22,8 @@ Order.hasMany(OrderItem)
 
 User.hasMany(Order)
 
-Product.belongsToMany(Order, {through: OrderItem})
+Product.belongsToMany(Order, {through: OrderItem, as: 'orders'})
+Order.belongsToMany(Product, {through: OrderItem, as: 'products'})
 
 module.exports = {
   User,
