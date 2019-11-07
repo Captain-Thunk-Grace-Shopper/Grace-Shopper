@@ -70,6 +70,9 @@ class Checkout extends React.Component {
               name="instructions"
               placeholder="Provide details such as building description, security code, box number or other navigation instructions"
             />
+
+            <br />
+            <h2>Payment:</h2>
             <br />
             <input type="submit" value="Deliver to this Address" />
           </form>
