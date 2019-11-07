@@ -16,18 +16,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/orders', async (req, res, next) => {
-  try {
-    const orders = await Order.findAll({
-      include: [{model: OrderItem}]
-    })
-
-    res.json(orders)
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.get('/openOrderProducts', async (req, res, next) => {
   //CHECK SESSIONS
   //if guest --> res.send()
