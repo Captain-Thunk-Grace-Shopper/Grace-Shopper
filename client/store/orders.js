@@ -27,6 +27,15 @@ export const getOrders = () => async dispatch => {
   }
 }
 
+export const getOpenCart = () => async dispatch => {
+  try {
+    const res = await axios.get('/api/orders/openCart')
+    dispatch(getOrdersAction(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
