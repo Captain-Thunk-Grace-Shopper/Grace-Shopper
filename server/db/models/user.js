@@ -5,19 +5,19 @@ const db = require('../db')
 const User = db.define('user', {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   address: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   zip: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   phoneNumber: {
     type: Sequelize.TEXT,
@@ -25,7 +25,7 @@ const User = db.define('user', {
   },
   country: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   instructions: {
     type: Sequelize.TEXT,
