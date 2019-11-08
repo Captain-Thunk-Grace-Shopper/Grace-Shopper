@@ -22,9 +22,7 @@ router.get('/openOrderProducts', async (req, res, next) => {
     if (req.session.passport) {
       const userId = req.session.passport.user
       //grab user's open cart
-      const orders = await Order.findOne({
-        where: {status: 'Created', userId: userId}
-      })
+      const orders = await Order.findOpenCart(userId)
       //get open cart's items
       const allProducts = await orders.getProducts()
       //send open cart's items
