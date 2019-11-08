@@ -16,5 +16,10 @@ const Order = db.define('order', {
     allowNull: false
   }
 })
-
+Order.findOpenCart = async function(userId) {
+  const openCart = await Order.findOne({
+    where: {status: 'Created', userId: userId}
+  })
+  return openCart
+}
 module.exports = Order
