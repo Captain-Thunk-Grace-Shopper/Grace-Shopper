@@ -17,6 +17,15 @@ body {
   width: 100vw;
 }
 
+.app-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: white;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+}
+
 nav {
   width: 100%;
   background-color: #555555;
@@ -29,10 +38,10 @@ nav {
 
 ul {
   padding-left: 0px;
+  list-style: none;
 }
 
 #nav-bar-ul {
-  list-style: none;
   display: flex;
   margin-right: 20px;
 }
@@ -66,4 +75,40 @@ label {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.grocery-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.grocery-list a {
+  color: black;
+  text-decoration: none;
+}
+
+#groceries-container {
+  display: flex;
+  margin: 15px;
+  padding-top: 10px;
+}
+
+#grocery-list-image-container {
+  display: flex;
+  width: 150px;
+  height: 150px;
+  align-items: center;
+  justify-content: center;
+}
+
+#grocery-list-image {
+  max-width: 150px;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.grocery-item {
+  margin: 20px;
 }
