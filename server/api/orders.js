@@ -17,19 +17,22 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/openOrderProducts', async (req, res, next) => {
-  //CHECK SESSIONS
-  //if guest --> res.send()
-  //if user:
-  //check userid --> set userId below and execute following try/catch:
-  const userId = 1
   try {
-    //grab user's open cart
-    const orders = await Order.findOne({
-      where: {status: 'Created', userId: userId}
-    })
-    //get open cart's items
-    const allProducts = await orders.getProducts()
-    res.json(allProducts)
+    //check if user or guest
+    if (req.session.passport) {
+      const userId = req.session.passport.user
+      //grab user's open cart
+      const orders = await Order.findOne({
+        where: {status: 'Created', userId: userId}
+      })
+      //get open cart's items
+      const allProducts = await orders.getProducts()
+      //send open cart's items
+      res.json(allProducts)
+    } else {
+      //else send guest cart
+      res.send(req.session.order)
+    }
   } catch (err) {
     next(err)
   }
@@ -44,20 +47,20 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-//GET ORDERS FOR SPECIFIC USER OR GUEST
-router.get('/user', async (req, res, next) => {
-  try {
-    if (req.session.passport) {
-      const orders = await Order.findAll({
-        where: {userId: req.session.passport.user},
-        include: [{model: OrderItem}]
-      })
-      res.json(orders)
-    } else {
-      // res.send(req.session.order)
-      res.send(req.session)
-    }
-  } catch (err) {
-    next(err)
-  }
-})
+// //GET ORDERS FOR SPECIFIC USER OR GUEST
+// router.get('/user', async (req, res, next) => {
+//   try {
+//     if (req.session.passport) {
+//       const orders = await Order.findAll({
+//         where: {userId: req.session.passport.user},
+//         include: [{model: OrderItem}]
+//       })
+//       res.json(orders)
+//     } else {
+//       // res.send(req.session.order)
+//       res.send(req.session)
+//     }
+//   } catch (err) {
+//     next(err)
+//   }
+// })
