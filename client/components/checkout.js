@@ -24,7 +24,7 @@ class Checkout extends React.Component {
     return (
       <main>
         <div>
-          <h2>Add Shipping Address </h2>
+          <h3>Add Shipping Address </h3>
           <form onSubmit={this.handleSubmit}>
             <label>
               First Name :
@@ -72,9 +72,31 @@ class Checkout extends React.Component {
             />
 
             <br />
-            <h2>Payment:</h2>
+            <h3>Payment Information:</h3>
+            <label>
+              Card Owner:<input name="cardOwner" type="text" />
+            </label>
+            <label>
+              Card Type:{' '}
+              <select name="country">
+                <option value="Credit">Credit</option>
+                <option value="Debit">Debit</option>
+              </select>
+            </label>
+            <label>
+              Card Number:<input name="cardNumber" type="number" />
+            </label>
+            <label>
+              CVV:<input name="cvv" type="number" />
+            </label>
+            <label>
+              Expiration Date:<input name="expDate" type="number" />
+            </label>
+            <label>
+              Billing Address:<input name="billAddress" type="text" />
+            </label>
             <br />
-            <input type="submit" value="Deliver to this Address" />
+            <input type="submit" className="deliver" value="Place Your Order" />
           </form>
         </div>
       </main>
