@@ -10,6 +10,9 @@ class Home extends React.Component {
     this.props.getProducts()
   }
   render() {
+    if (!Array.isArray(this.props.products)) {
+      return <h1>Loading</h1>
+    }
     return (
       <div>
         <h2>SuperMarket</h2>

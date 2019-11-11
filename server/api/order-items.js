@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 const router = require('express').Router()
 const {OrderItem} = require('../db/models')
 const {Order, Product} = require('../db/models')
