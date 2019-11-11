@@ -91,6 +91,26 @@ router.post('/', async (req, res, next) => {
 //PUT : update the order-item quantity (use case: if order-item already exists,
 // aka from -/+ buttons in cart view)
 
+router.put('/:itemId', async (req, res, next) => {
+  try {
+    if (!req.session.passport || !req.session.passport.user) {
+      let cart = req.session.order
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].guestId === req.params.itemId) {
+          cart[i].quantity = req.body.quantity
+        }
+        res.status(200).send('Quantity updated!')
+      }
+    } else {
+      let order = await OrderItem.findById(req.params.itemId)
+      await order.update({quantity: req.body.quantity})
+      res.json(order)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
 //DELETE: remove order-item
 
 router.delete('/:itemId', async (req, res, next) => {
