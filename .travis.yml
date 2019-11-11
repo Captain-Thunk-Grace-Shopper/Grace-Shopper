@@ -15,14 +15,16 @@ install:
 before_script:
   - psql -c 'create database "captain-thunk-grace-shopper-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
-  - npm test             # test the code
+  - npm test # test the code
   - npm run build-client # make the bundle
-
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
+  provider: heroku
+  # app should be your heroku app name; see README
+  app: graceshopper-captn-thunk
+  # the secure key indicates an encrypted value; see README
+  api_key:
+    secure: 0sJtuCAOyQMjOzX8Y1QOp0OBaZm1oOi9k8fcx1izGOppQgBUXBsZUsYe+v9zx39HWDC5mpI21Yl9F4r69LFVb6pgydwYMY42RF8DDYpJaC90NThe51oiur/gO5/LIAXYjdWv2V/q2J3nQq2uxCMhAwumqH7yYarajKFEn4H3YGuCNJhsFA86R2O9J5LyddRIwcO91kE5NNoRkWF7RAtLZS0f6QIgtpxUpGcotOynXOB0Evj3pfJEaOzQGxhqmNdmUGq4qnXqT0oQT0bYM7G1fTYAplGBaBbi+ybypdiRwyz1gkvtYXbA2VUcrhA52pldqQmjk3PpRqUjkLbHSFrkcv/KBbFoRO+G3XjQrIIKPhJzm+l6Qp78WqWIHkuXpSQ0ER5zTYtyDButzqPKbaHCpgILvF/1OSSw9R74zXAZ1VGQJpf9CSgE63Ypae5OqnG3H6Zz8eDJWJ3lYYWB10M7pMOMcR+YeC4UBSTDmkncYxpNYVcMx9UukqmClEahYZIIjB8kn1mRNLZvV1Xb2KPaWaU3xiXcZ9ybxVtMqch/a52C7oNMyp0F6q03c04p5opo0sTLKGsnN5pdcm9kH3IW1eGkUxgMyz3ejDiq2VGZoaQRxkByIUksw55Jksb2O+UhZEfqs09n/uM+8ShWQ0/C8ud3klYaJWCHf0PZTTCT4hA=
