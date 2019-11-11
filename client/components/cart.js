@@ -10,6 +10,7 @@ class Cart extends React.Component {
 
   render() {
     const openOrder = this.props.openOrder
+    let total = 0
     //if there are no carts
     if (!openOrder.length) {
       return <h1>Add an item to start a cart</h1>
@@ -21,6 +22,10 @@ class Cart extends React.Component {
           {openOrder.map((item, idx) => (
             <CartItem idx={idx} key={item.name} item={item} />
           ))}
+          {openOrder.map(item => {
+            total += item.price * item.quantity
+          })}
+          Total: {total}
         </div>
       </main>
     )
