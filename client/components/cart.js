@@ -19,11 +19,7 @@ class Cart extends React.Component {
         <div>
           <h1>Your cart:</h1>
           {openOrder.map((item, idx) => (
-            <CartItem
-              idx={idx}
-              key={[item.orderId, item.productId]}
-              item={item}
-            />
+            <CartItem idx={idx} key={item.name} item={item} />
           ))}
         </div>
       </main>
