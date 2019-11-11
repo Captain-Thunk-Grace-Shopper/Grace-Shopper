@@ -9,17 +9,19 @@ const Order = db.define('order', {
   },
   address: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   }
 })
+
 Order.findOpenCart = async function(userId) {
   const openCart = await Order.findOne({
     where: {status: 'Created', userId: userId}
   })
   return openCart
 }
+
 module.exports = Order

@@ -8,7 +8,7 @@ const GET_ORDERS = 'GET_ORDERS'
 /**
  * INITIAL STATE
  */
-const defaultOrder = {}
+const defaultOrders = []
 
 /**
  * ACTION CREATORS
@@ -36,10 +36,24 @@ export const getOpenOrder = () => async dispatch => {
   }
 }
 
+export const addToOpenOrder = (
+  productName,
+  quantity,
+  price
+) => async dispatch => {
+  try {
+    await axios.post('/api/order-items/', {name: productName, quantity, price})
+    const res = await axios.get('/api/orders/openOrderProducts')
+    dispatch(getOrdersAction(res.data))
+  } catch (err) {
+    console.log('Could not add order to cart')
+    console.error(err)
+  }
+}
 /**
  * REDUCER
  */
-export default function(state = defaultOrder, action) {
+export default function(state = defaultOrders, action) {
   switch (action.type) {
     case GET_ORDERS:
       return action.orders
