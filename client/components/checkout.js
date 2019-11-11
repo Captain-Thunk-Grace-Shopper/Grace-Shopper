@@ -78,7 +78,7 @@ class Checkout extends React.Component {
             </label>
             <label>
               Card Type:{' '}
-              <select name="country">
+              <select name="cardType">
                 <option value="Credit">Credit</option>
                 <option value="Debit">Debit</option>
               </select>
@@ -90,7 +90,7 @@ class Checkout extends React.Component {
               CVV:<input name="cvv" type="number" />
             </label>
             <label>
-              Expiration Date:<input name="expDate" type="number" />
+              Expiration Date:<input name="expDate" type="date" />
             </label>
             <label>
               Billing Address:<input name="billAddress" type="text" />
