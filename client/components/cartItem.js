@@ -15,6 +15,10 @@ class CartItem extends React.Component {
     this.plus = this.plus.bind(this)
   }
 
+  componentDidMount() {
+    console.log('COMPONENT DID MOUNT:', this.props)
+  }
+
   plus() {
     this.setState(previousState => ({quantity: previousState.quantity + 1}))
   }
@@ -23,11 +27,6 @@ class CartItem extends React.Component {
     if (this.state.quantity > 0) {
       this.setState(previousState => ({quantity: previousState.quantity - 1}))
     }
-  }
-
-  handleChange(evt, itemId) {
-    this.setState({quantity: evt.target.value})
-    this.props.update(itemId, this.state.quantity)
   }
 
   render() {
@@ -39,7 +38,7 @@ class CartItem extends React.Component {
     const price =
       Math.floor(cartItem.price * quantity * 100) / 100 ||
       Math.floor(cartItem['order-item'.price] * quantity * 100) / 100
-
+    console.log('ID AND QUANTITY', itemId, this.state.quantity)
     return (
       <main>
         <div>
@@ -56,10 +55,8 @@ class CartItem extends React.Component {
             type="number"
             name="quantity"
             value={this.state.quantity}
-            onChange={evt => {
-              this.update(itemId, evt.target.value)
-              // this.setState({quantity: evt.target.value})
-            }}
+            // onChange={() => this.props.update(itemId, this.state.quantity)}
+            onChange={this.props.update(itemId, this.state.quantity)}
           />
           <input
             type="button"
@@ -83,9 +80,13 @@ class CartItem extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
+  console.log('mapping dispatch to props')
   return {
     delete: id => dispatch(removeFromOpenOrder(id)),
-    update: (id, quantity) => dispatch(updateOpenOrder(id, quantity))
+    update: (id, quantity) => {
+      console.log('in update')
+      dispatch(updateOpenOrder(id, quantity))
+    }
   }
 }
 

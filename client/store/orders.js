@@ -62,6 +62,7 @@ export const removeFromOpenOrder = itemId => {
 export const updateOpenOrder = (itemId, quantity) => {
   return async dispatch => {
     try {
+      console.log('INSIDE THUNK: ', itemId, quantity)
       await axios.put(`/api/order-items/${itemId}`, {quantity})
       const {data} = await axios.get('/api/orders/openOrderProducts')
       dispatch(getOrdersAction(data))
