@@ -112,3 +112,24 @@ form div {
 .grocery-item {
   margin: 20px;
 }
+
+.checkout-button {
+  background-color: teal;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.deliver {
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
