@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 const router = require('express').Router()
 const {OrderItem} = require('../db/models')
 const {Order, Product} = require('../db/models')
@@ -42,6 +43,13 @@ router.post('/', async (req, res, next) => {
       }
       //if item is not in cart
       cart.push({
+        guestId:
+          Math.random()
+            .toString(36)
+            .substring(2, 15) +
+          Math.random()
+            .toString(36)
+            .substring(2, 15),
         name: req.body.name,
         quantity: req.body.quantity,
         price: req.body.price
@@ -84,3 +92,21 @@ router.post('/', async (req, res, next) => {
 // aka from -/+ buttons in cart view)
 
 //DELETE: remove order-item
+
+router.delete('/:itemId', async (req, res, next) => {
+  try {
+    if (!req.session.passport || !req.session.passport.user) {
+      let cart = req.session.order
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].guestId === req.params.itemId) {
+          cart = cart.splice(i, 1)
+        }
+      }
+    } else {
+      await OrderItem.destroy({where: {id: req.params.itemId}})
+    }
+    res.status(204).send('Item deleted from cart!')
+  } catch (error) {
+    next(error)
+  }
+})
