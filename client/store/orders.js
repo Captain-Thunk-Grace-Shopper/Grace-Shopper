@@ -50,6 +50,15 @@ export const addToOpenOrder = (
     console.error(err)
   }
 }
+
+export const removeFromOpenOrder = itemId => {
+  return async dispatch => {
+    await axios.delete(`/api/order-items/${itemId}`)
+    const {data} = await axios.get('/api/orders/openOrderProducts')
+    dispatch(getOrdersAction(data))
+  }
+}
+
 /**
  * REDUCER
  */
