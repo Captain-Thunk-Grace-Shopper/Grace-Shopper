@@ -24,7 +24,9 @@ class Cart extends React.Component {
             <CartItem idx={idx} key={item.name} item={item} />
           ))}
           {openOrder.map(item => {
-            total += item.price * item.quantity
+            let price = item.price || item['order-item'].price
+            let quantity = item.quantity || item['order-item'].quantity
+            total += price * quantity
           })}
           Total: {total}
           <br />
