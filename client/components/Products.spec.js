@@ -9,14 +9,14 @@ import Products from './Products'
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
-describe('Products', () => {
-  let products
+// describe('Products', () => {
+//   let products
 
-  beforeEach(() => {
-    products = shallow(<Products products={{name: 'bananas'}} />)
-  })
+//   beforeEach(() => {
+//     products = shallow(<Products products={{name: 'bananas'}} />)
+//   })
 
-  it('renders the product name in an h5', () => {
-    expect(products.find('h5').text()).to.be.equal('bananas')
-  })
-})
+//   it('renders the product name in an h5', () => {
+//     expect(products.find('h5').text()).to.be.equal('bananas')
+//   })
+// })
