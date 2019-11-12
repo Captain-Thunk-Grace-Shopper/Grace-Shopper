@@ -41,8 +41,8 @@ router.post('/', async (req, res, next) => {
           res.redirect('/update')
         }
       }
-      //if item is not in cart
-      cart.push({
+      //if item is not in cart, create cart item then add to cart
+      const newItem = {
         cartItemId:
           Math.random()
             .toString(36)
@@ -53,8 +53,9 @@ router.post('/', async (req, res, next) => {
         name: req.body.name,
         quantity: req.body.quantity,
         price: req.body.price
-      })
-      res.sendStatus(201)
+      }
+      cart.push(newItem)
+      res.status(201).json(newItem)
     } else {
       //user cart
       const userId = req.session.passport.user
@@ -81,7 +82,10 @@ router.post('/', async (req, res, next) => {
         price: req.body.price,
         orderId: openCart.id
       })
-      res.status(201).json(newItem)
+      const newItemProducts = await openCart.getProducts({
+        where: {id: newItem.productId}
+      })
+      res.status(201).json(newItemProducts[0])
     }
   } catch (error) {
     next(error)
