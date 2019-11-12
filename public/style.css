@@ -18,12 +18,23 @@ body {
 }
 
 .app-container {
-  max-width: 1300px;
   margin: 0 auto;
-  background-color: white;
+  background-color: teal;
   height: 100vh;
-  margin: 0 auto;
   text-align: center;
+  border: 1px solid black;
+}
+
+#main-app-container {
+  margin: 0 auto;
+  display: flex;
+  max-width: 95%;
+  background-color: white;
+  height: 100%;
+}
+
+#main-app-body {
+  flex-grow: 2;
 }
 
 nav {
@@ -123,6 +134,7 @@ form div {
   display: inline-block;
   font-size: 16px;
 }
+
 .deliver {
   background-color: green;
   border: none;
@@ -132,4 +144,29 @@ form div {
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
+}
+
+.cart-container {
+  flex-shrink: 0;
+  order: 1;
+  background-color: lightgrey;
+  display: flex;
+  flex-direction: column;
+}
+
+#quantity-field {
+  font-size: 16px;
+  text-align: center;
+}
+.cart-item {
+  padding: 10px 20px;
+}
+
+#plus-minus {
+  margin: 5px;
+  font-size: 16px;
+}
+
+#auth-form-container {
+  display: flex;
 }

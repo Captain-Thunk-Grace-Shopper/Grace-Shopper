@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {addToOpenOrder} from '../store/orders'
 import Products from './Products'
-import Cart from './cart'
 
 class Home extends React.Component {
   componentDidMount() {
@@ -25,7 +24,6 @@ class Home extends React.Component {
             ))}
           </ul>
         </div>
-        <Cart />
       </div>
     )
   }

@@ -17,7 +17,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <ul id="nav-bar-ul">
             <li>
               {/* The navbar will show these links after you log in */}
-              <Link to="/home" className="nav-item right-nav">
+              <Link to="/user" className="nav-item right-nav">
                 Account & Orders
               </Link>
             </li>
@@ -56,7 +56,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         </div>
       )}
     </nav>
-    <hr />
   </div>
 )
 

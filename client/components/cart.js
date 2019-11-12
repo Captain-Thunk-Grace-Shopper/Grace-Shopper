@@ -17,26 +17,28 @@ class Cart extends React.Component {
       return <h1>Add an item to start a cart</h1>
     }
     return (
-      <main>
-        <div>
-          <h1>Your cart:</h1>
+      <div className="cart-container">
+        <h1 id="cart-header">Your cart:</h1>
+        <div id="cart-items">
           {openOrder.map((item, idx) => (
             <CartItem idx={idx} key={item.name} item={item} />
           ))}
+        </div>
+        <div id="cart-total">
           {openOrder.map(item => {
             let price = item.price || item['order-item'].price
             let quantity = item.quantity || item['order-item'].quantity
             total += price * quantity
           })}
           Total: $ {Math.floor(total * 100) / 100}
-          <br />
-          <Link to="/checkout">
-            <button type="button" className="checkout-button">
-              Checkout
-            </button>
-          </Link>
         </div>
-      </main>
+        <br />
+        <Link to="/checkout">
+          <button type="button" className="checkout-button">
+            Checkout
+          </button>
+        </Link>
+      </div>
     )
   }
 }

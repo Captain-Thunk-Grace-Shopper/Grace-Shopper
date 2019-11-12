@@ -47,26 +47,29 @@ class CartItem extends React.Component {
       Math.floor(cartItem['order-item'.price] * quantity * 100) / 100
 
     return (
-      <main>
-        <div>
-          Item {num}: {name}, Price: $ {price}
-          <br />
-          Quantity:
+      <div className="cart-item">
+        {name}, Price: $ {price}
+        <br />
+        <div id="cart-quantity">
+          Qty:
           <input
             type="button"
             value="-"
+            id="plus-minus"
             className="button-minus"
             onClick={this.minus}
           />
           <input
             type="number"
             name="quantity"
+            id="quantity-field"
             value={this.state.quantity}
             onChange={evt => this.setState({quantity: evt.target.value})}
           />
           <input
             type="button"
             value="+"
+            id="plus-minus"
             className="button-plus"
             onClick={this.plus}
           />
@@ -77,10 +80,10 @@ class CartItem extends React.Component {
               this.props.delete(itemId)
             }}
           >
-            Delete
+            <i className="fas fa-trash-alt" />
           </button>
         </div>
-      </main>
+      </div>
     )
   }
 }
