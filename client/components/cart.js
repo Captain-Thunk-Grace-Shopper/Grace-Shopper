@@ -28,7 +28,7 @@ class Cart extends React.Component {
             let quantity = item.quantity || item['order-item'].quantity
             total += price * quantity
           })}
-          Total: {total}
+          Total: {Math.floor(total * 100) / 100}
           <br />
           <Link to="/checkout">
             <button type="button" className="checkout-button">
