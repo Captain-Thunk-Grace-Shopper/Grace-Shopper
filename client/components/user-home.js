@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import PastOrder from './PastOrder'
-import Cart from './cart'
 import {getPastOrders} from '../store/past-orders'
 
 /**
@@ -19,22 +18,27 @@ class UserHome extends React.Component {
     const pastOrders = this.props.pastOrders
 
     if (!pastOrders.length) {
-      return <h1>No past orders</h1>
+      return (
+        <div>
+          <h3>Welcome, {email}!</h3>
+          <h1>No past orders</h1>
+        </div>
+      )
     }
     return (
       <div>
         <h3>Welcome, {email}!</h3>
-        <div className="user-home-current-cart">
-          <h2>Current Cart</h2>
-          <Cart />
-        </div>
-        <h2>Past Orders</h2>
-        {pastOrders.map((order, idx) => (
-          <div key={idx}>
-            <h3>Order {idx + 1}</h3>
-            <PastOrder items={order} />
+        <div className="past-orders-container">
+          <h2>Past Orders</h2>
+          <div id="individual-past-order">
+            {pastOrders.map((order, idx) => (
+              <div key={order.id}>
+                <h3>Order {idx + 1}</h3>
+                <PastOrder items={order} />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     )
   }
