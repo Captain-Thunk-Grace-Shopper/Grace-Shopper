@@ -23,7 +23,7 @@ class UserHome extends React.Component {
     }
     return (
       <div>
-        {/* <h3>Welcome, {email}!</h3> */}
+        <h3>Welcome, {email}!</h3>
         <div className="user-home-current-cart">
           <h2>Current Cart</h2>
           <Cart />
