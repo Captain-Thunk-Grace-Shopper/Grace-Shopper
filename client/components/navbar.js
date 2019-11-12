@@ -8,6 +8,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav>
       <Link to="/" className="nav-title">
+        <i className="fas fa-carrot" />
         Grace Shopper
       </Link>
 
@@ -17,7 +18,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <li>
               {/* The navbar will show these links after you log in */}
               <Link to="/home" className="nav-item right-nav">
-                Home
+                Account & Orders
               </Link>
             </li>
             <li>
@@ -27,7 +28,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             </li>
             <li>
               <Link to="/checkout" className="nav-item right-nav">
-                Checkout
+                <i className="fas fa-shopping-cart" />
               </Link>
             </li>
           </ul>
@@ -48,7 +49,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             </li>
             <li>
               <Link to="/checkout" className="nav-item right-nav">
-                Checkout
+                <i className="fas fa-shopping-cart" />
               </Link>
             </li>
           </ul>
