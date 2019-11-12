@@ -91,7 +91,17 @@ export const updateOpenOrder = (itemId, quantity) => {
   }
 }
 
+export const closeOpenOrder = (address, name) => {
+  return async () => {
+    try {
+      await axios.put(`/api/orders`, {address, name})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 /**
+ *
  * REDUCER
  */
 export default function(state = defaultOrders, action) {
