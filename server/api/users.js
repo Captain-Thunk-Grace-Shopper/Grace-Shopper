@@ -30,11 +30,9 @@ router.get('/:userId', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-  console.log('hello')
   try {
     //perhaps pass in only individual fields for security
     const address = await User.create(req.body)
-
     res.status(201).json(address)
   } catch (error) {
     next(error)

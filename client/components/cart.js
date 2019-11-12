@@ -27,7 +27,7 @@ class Cart extends React.Component {
             let quantity = item.quantity || item['order-item'].quantity
             total += price * quantity
           })}
-          Total: {Math.floor(total * 100) / 100}
+          Total: $ {Math.floor(total * 100) / 100}
           <br />
         </div>
       </main>

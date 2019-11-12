@@ -24,4 +24,11 @@ Order.findOpenCart = async function(userId) {
   return openCart
 }
 
+Order.findClosedCart = async function(userId) {
+  const closedCart = await Order.findAll({
+    where: {status: 'Complete', userId: userId}
+  })
+  return closedCart
+}
+
 module.exports = Order
