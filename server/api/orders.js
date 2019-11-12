@@ -1,8 +1,6 @@
 const router = require('express').Router()
 const {Order} = require('../db/models')
-const {User} = require('../db/models')
-const {OrderItem} = require('../db/models')
-const {Product} = require('../db/models')
+const {User, OrderItem, Product} = require('../db/models')
 // const Product = require('./products')
 module.exports = router
 
@@ -34,14 +32,27 @@ router.get('/openOrderProducts', async (req, res, next) => {
   }
 })
 
-//create new open cart (if no open carts exist)
-router.post('/', async (req, res, next) => {
+//PUT: update open cart status on checkout for user
+//or post guest cart
+router.put('/', async (req, res, next) => {
   try {
-    const order = await Order.create(req.body)
-    res.json(order)
+    //guest order
+    if (!req.session.passport || !req.session.passport.user) {
+      const order = await Order.create({
+        status: 'Submitted',
+        address: req.body.address,
+        name: req.body.name
+      })
+      res.json(order)
+    } else {
+      //user order update
+      const existOrder = await OrderItem.findOne({
+        where: {id: req.params.orderId}
+      })
+      existOrder.status = 'Submitted'
+      res.json(existOrder)
+    }
   } catch (error) {
     next(error)
   }
 })
-
-//PUT: update open cart status on checkout
