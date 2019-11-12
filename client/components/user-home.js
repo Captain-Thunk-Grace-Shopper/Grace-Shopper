@@ -30,7 +30,7 @@ class UserHome extends React.Component {
         </div>
         <h2>Past Orders</h2>
         {pastOrders.map((order, idx) => (
-          <div key={order.id}>
+          <div key={idx}>
             <h3>Order {idx + 1}</h3>
             <PastOrder items={order} />
           </div>

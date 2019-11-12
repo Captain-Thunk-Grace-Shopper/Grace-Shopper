@@ -5,7 +5,7 @@ const PastOrder = props => {
   return (
     <div>
       {items.map(item => (
-        <div key={item.name}>
+        <div key={item['order-item'].id}>
           {item.name}
           <br />
           {item.price}
