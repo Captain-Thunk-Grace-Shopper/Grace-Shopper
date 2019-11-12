@@ -12,6 +12,7 @@ import {
   Payment,
   LastPage
 } from './components'
+import Cart from './components/cart'
 import {me} from './store'
 
 /**
@@ -26,8 +27,10 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
+      <div id="main-app-container">
+        <Switch>
+          <div id="main-app-body">
+            {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
@@ -35,15 +38,19 @@ class Routes extends Component {
         <Route path="/payment" component={Payment} />
         <Route path="/lastpage" component={LastPage} />
         <Route path="/products/:productId" component={SingleProduct} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route exact path="/home" component={UserHome} />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch>
+            {isLoggedIn && (
+              <Switch>
+                {/* Routes placed here are only available after logging in */}
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/user" component={UserHome} />
+              </Switch>
+            )}
+          </div>
+          {/* Displays our Login component as a fallback */}
+          <Route component={Login} />
+        </Switch>
+        <Cart />
+      </div>
     )
   }
 }
