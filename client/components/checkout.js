@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addAddress} from '../store/user'
+import Cart from './cart'
+import {Link} from 'react-router-dom'
 class Checkout extends React.Component {
   constructor(props) {
     super(props)
@@ -24,6 +26,7 @@ class Checkout extends React.Component {
     return (
       <main>
         <div>
+          <Cart />
           <h3>Add Shipping Address </h3>
           <form onSubmit={this.handleSubmit}>
             <label>
@@ -70,34 +73,13 @@ class Checkout extends React.Component {
               name="instructions"
               placeholder="Provide details such as building description, security code, box number or other navigation instructions"
             />
-
             <br />
-            <h3>Payment Information:</h3>
-            <label>
-              Card Owner:<input name="cardOwner" type="text" />
-            </label>
-            <label>
-              Card Type:{' '}
-              <select name="cardType">
-                <option value="Credit">Credit</option>
-                <option value="Debit">Debit</option>
-              </select>
-            </label>
-            <label>
-              Card Number:<input name="cardNumber" type="number" />
-            </label>
-            <label>
-              CVV:<input name="cvv" type="number" />
-            </label>
-            <label>
-              Expiration Date:<input name="expDate" type="date" />
-            </label>
-            <label>
-              Billing Address:<input name="billAddress" type="text" />
-            </label>
-            <br />
-            <input type="submit" className="deliver" value="Place Your Order" />
           </form>
+          <Link to="/payment">
+            <button type="button" className="deliver">
+              Deliver to this address
+            </button>
+          </Link>
         </div>
       </main>
     )
