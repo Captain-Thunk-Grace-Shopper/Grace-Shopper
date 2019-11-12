@@ -43,7 +43,7 @@ router.post('/', async (req, res, next) => {
       }
       //if item is not in cart
       cart.push({
-        guestId:
+        cartItemId:
           Math.random()
             .toString(36)
             .substring(2, 15) +
@@ -96,13 +96,13 @@ router.put('/:itemId', async (req, res, next) => {
     if (!req.session.passport || !req.session.passport.user) {
       let cart = req.session.order
       for (let i = 0; i < cart.length; i++) {
-        if (cart[i].guestId === req.params.itemId) {
+        if (cart[i].cartItemId === req.params.itemId) {
           cart[i].quantity = req.body.quantity
         }
-        res.status(200).send('Quantity updated!')
       }
+      res.send('Item updated')
     } else {
-      let order = await OrderItem.findById(req.params.itemId)
+      let order = await OrderItem.findOne({where: {id: req.params.itemId}})
       await order.update({quantity: req.body.quantity})
       res.json(order)
     }
@@ -118,7 +118,7 @@ router.delete('/:itemId', async (req, res, next) => {
     if (!req.session.passport || !req.session.passport.user) {
       let cart = req.session.order
       for (let i = 0; i < cart.length; i++) {
-        if (cart[i].guestId === req.params.itemId) {
+        if (cart[i].cartItemId === req.params.itemId) {
           cart = cart.splice(i, 1)
         }
       }

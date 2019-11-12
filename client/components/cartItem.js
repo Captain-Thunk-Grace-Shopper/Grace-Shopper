@@ -10,21 +10,26 @@ class CartItem extends React.Component {
       quantity:
         this.props.item.quantity || this.props.item['order-item'].quantity
     }
-
     this.minus = this.minus.bind(this)
     this.plus = this.plus.bind(this)
   }
 
-  componentDidMount() {
-    console.log('COMPONENT DID MOUNT:', this.props)
-  }
+  componentDidMount() {}
 
   plus() {
+    this.props.update(
+      this.props.item.cartItemId || this.props.item['order-item'].id,
+      this.state.quantity + 1
+    )
     this.setState(previousState => ({quantity: previousState.quantity + 1}))
   }
 
   minus() {
     if (this.state.quantity > 0) {
+      this.props.update(
+        this.props.item.cartItemId || this.props.item['order-item'].id,
+        this.state.quantity - 1
+      )
       this.setState(previousState => ({quantity: previousState.quantity - 1}))
     }
   }
@@ -33,12 +38,14 @@ class CartItem extends React.Component {
     const cartItem = this.props.item
     const num = this.props.idx + 1
     const name = cartItem.name
-    const itemId = this.props.item.guestId || this.props.item['order-item'].id
+    const itemId =
+      this.props.item.cartItemId || this.props.item['order-item'].id
     const quantity = cartItem.quantity || cartItem['order-item'].quantity
+    //rounds price to nearest 10th
     const price =
       Math.floor(cartItem.price * quantity * 100) / 100 ||
       Math.floor(cartItem['order-item'.price] * quantity * 100) / 100
-    console.log('ID AND QUANTITY', itemId, this.state.quantity)
+
     return (
       <main>
         <div>
@@ -55,8 +62,7 @@ class CartItem extends React.Component {
             type="number"
             name="quantity"
             value={this.state.quantity}
-            // onChange={() => this.props.update(itemId, this.state.quantity)}
-            onChange={this.props.update(itemId, this.state.quantity)}
+            onChange={evt => this.setState({quantity: evt.target.value})}
           />
           <input
             type="button"
