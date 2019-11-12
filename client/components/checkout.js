@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {addAddress} from '../store/user'
 import Cart from './cart'
-import {Link} from 'react-router-dom'
+
 const INITIAL_STATE = {
   firstName: '',
   lastName: '',

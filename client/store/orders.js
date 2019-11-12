@@ -94,6 +94,7 @@ export const updateOpenOrder = (itemId, quantity) => {
 export const closeOpenOrder = (address, name) => {
   return async () => {
     try {
+      console.log('THUNKKK')
       await axios.put(`/api/orders`, {address, name})
     } catch (error) {
       console.log(error)
