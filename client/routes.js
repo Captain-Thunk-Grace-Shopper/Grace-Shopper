@@ -31,13 +31,13 @@ class Routes extends Component {
         <Switch>
           <div id="main-app-body">
             {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/checkout" component={Checkout} />
-        <Route path="/payment" component={Payment} />
-        <Route path="/lastpage" component={LastPage} />
-        <Route path="/products/:productId" component={SingleProduct} />
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/payment" component={Payment} />
+            <Route path="/lastpage" component={LastPage} />
+            <Route path="/products/:productId" component={SingleProduct} />
             {isLoggedIn && (
               <Switch>
                 {/* Routes placed here are only available after logging in */}

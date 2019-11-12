@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getOpenOrder} from '../store/orders'
 import CartItem from './cartItem'
+import {Link} from 'react-router-dom'
 
 class Cart extends React.Component {
   componentDidMount() {
@@ -30,7 +31,6 @@ class Cart extends React.Component {
             total += price * quantity
           })}
           Total: $ {Math.floor(total * 100) / 100}
-
         </div>
         <br />
         <Link to="/checkout">
