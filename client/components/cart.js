@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getOpenOrder} from '../store/orders'
 import CartItem from './cartItem'
-import {Link} from 'react-router-dom'
 
 class Cart extends React.Component {
   componentDidMount() {
@@ -30,11 +29,6 @@ class Cart extends React.Component {
           })}
           Total: {Math.floor(total * 100) / 100}
           <br />
-          <Link to="/checkout">
-            <button type="button" className="checkout-button">
-              Checkout
-            </button>
-          </Link>
         </div>
       </main>
     )
