@@ -32,6 +32,22 @@ router.get('/openOrderProducts', async (req, res, next) => {
   }
 })
 
+//get past orders from logged in user
+router.get('/pastOrders', async (req, res, next) => {
+  try {
+    //user cart
+    const pastOrders = []
+    const userId = req.session.passport.user
+    const orders = await Order.findClosedCart(userId)
+    for (let i = 0; i < orders.length; i++) {
+      pastOrders.push(await orders[i].getProducts())
+    }
+    res.json(pastOrders)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //PUT: update open cart status on checkout for user
 //or post guest cart
 router.put('/', async (req, res, next) => {
