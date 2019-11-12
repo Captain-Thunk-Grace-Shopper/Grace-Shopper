@@ -4,7 +4,8 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_ORDERS = 'GET_ORDERS'
-const ADD_ORDER = 'ADD_ORDER'
+const ADD_ORDER_ITEM = 'ADD_ORDER_ITEM'
+const REMOVE_ORDER_ITEM = 'REMOVE_ORDER_ITEM'
 
 /**
  * INITIAL STATE
@@ -15,7 +16,11 @@ const defaultOrders = []
  * ACTION CREATORS
  */
 const getOrdersAction = orders => ({type: GET_ORDERS, orders})
-const addOrderAction = order => ({type: ADD_ORDER, order})
+const addToOrderAction = orderItem => ({type: ADD_ORDER_ITEM, orderItem})
+const removeFromOrderAction = orderItemId => ({
+  type: REMOVE_ORDER_ITEM,
+  orderItemId
+})
 
 /**
  * THUNK CREATORS
@@ -64,18 +69,24 @@ export const addToOpenOrder = (
       quantity,
       price
     })
-    dispatch(addOrderAction(data))
+    dispatch(addToOrderAction(data))
   } catch (err) {
-    console.log('Could not add order to cart')
+    console.log('Could not add order item to cart')
     console.error(err)
   }
 }
 
+// export const removeFromOpenOrder = itemId => {
+//   return async dispatch => {
+//     await axios.delete(`/api/order-items/${itemId}`)
+//     const {data} = await axios.get('/api/orders/openOrderProducts')
+//     dispatch(getOrdersAction(data))
+//   }
+// }
 export const removeFromOpenOrder = itemId => {
   return async dispatch => {
     await axios.delete(`/api/order-items/${itemId}`)
-    const {data} = await axios.get('/api/orders/openOrderProducts')
-    dispatch(getOrdersAction(data))
+    dispatch(removeFromOrderAction(itemId))
   }
 }
 
@@ -94,23 +105,27 @@ export const updateOpenOrder = (itemId, quantity) => {
 export const closeOpenOrder = (address, name) => {
   return async () => {
     try {
-      console.log('THUNKKK')
       await axios.put(`/api/orders`, {address, name})
     } catch (error) {
       console.log(error)
     }
   }
 }
+
 /**
- *
  * REDUCER
  */
 export default function(state = defaultOrders, action) {
   switch (action.type) {
     case GET_ORDERS:
       return action.orders
-    case ADD_ORDER:
+    case ADD_ORDER_ITEM:
       return [...state, action.order]
+    case REMOVE_ORDER_ITEM:
+      let stateCopy = state.filter(item => {
+        return item.id !== action.orderItemId
+      })
+      return stateCopy
     default:
       return state
   }
