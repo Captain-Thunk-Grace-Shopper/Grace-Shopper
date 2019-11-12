@@ -59,14 +59,13 @@ router.put('/', async (req, res, next) => {
         address: req.body.address,
         name: req.body.name
       })
-      res.json(order)
+      res.status(201).json(order)
     } else {
       //user order update
-      const existOrder = await OrderItem.findOne({
-        where: {id: req.params.orderId}
-      })
-      existOrder.status = 'Submitted'
-      res.json(existOrder)
+      const userId = req.session.passport.user
+      const existOrder = await Order.findOpenCart(userId)
+      existOrder.update({status: 'Submitted'})
+      res.status(200).json(existOrder)
     }
   } catch (error) {
     next(error)
