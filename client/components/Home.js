@@ -4,7 +4,7 @@ import {getProducts} from '../store/products'
 import {addToOpenOrder} from '../store/orders'
 import Products from './Products'
 import Cart from './cart'
-
+import {Link} from 'react-router-dom'
 class Home extends React.Component {
   componentDidMount() {
     this.props.getProducts()
@@ -26,6 +26,11 @@ class Home extends React.Component {
           </ul>
         </div>
         <Cart />
+        <Link to="/checkout">
+          <button type="button" className="checkout-button">
+            Checkout
+          </button>
+        </Link>
       </div>
     )
   }
