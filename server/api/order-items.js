@@ -38,7 +38,7 @@ router.post('/', async (req, res, next) => {
       // //check if item already exists
       for (let i = 0; i < cart.length; i++) {
         if (cart[i].name === req.body.name) {
-          res.redirect('/update')
+          res.sendStatus(500)
         }
       }
       //if item is not in cart, create cart item then add to cart
@@ -69,7 +69,7 @@ router.post('/', async (req, res, next) => {
       const allProducts = await openCart.getProducts()
       for (let i = 0; i < allProducts.length; i++) {
         if (allProducts[i].dataValues.name === req.body.name) {
-          res.redirect('/update')
+          res.sendStatus(500)
         }
       }
       // if item is not in cart, create item w/ right productId & orderId
