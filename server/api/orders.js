@@ -68,7 +68,11 @@ router.put('/', async (req, res, next) => {
       //user order update
       const userId = req.session.passport.user
       const existOrder = await Order.findOpenCart(userId)
-      existOrder.update({status: 'Submitted'})
+      existOrder.update({
+        address: req.body.address,
+        name: req.body.name,
+        status: 'Submitted'
+      })
       res.status(200).json(existOrder)
     }
   } catch (error) {
