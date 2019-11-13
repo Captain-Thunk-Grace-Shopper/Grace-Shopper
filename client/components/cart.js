@@ -14,7 +14,7 @@ class Cart extends React.Component {
     let total = 0
     //if there are no carts
     if (!openOrder.length) {
-      return <h1>Add an item to start a cart</h1>
+      return <br />
     }
     return (
       <div className="cart-container">

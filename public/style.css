@@ -3,6 +3,17 @@
   font-family: sans-serif;
 }
 
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
 input:focus,
 select:focus,
 textarea:focus,
@@ -95,11 +106,20 @@ form div {
   display: inline-block;
 }
 
+#grocery-container-2 {
+  background-color: white;
+}
+
 .grocery-list {
+  max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   text-align: center;
+  align-content: center;
+  background-color: lightgrey;
+  padding: 20px;
+  margin-top: 0px;
 }
 
 .grocery-list a {
@@ -109,26 +129,30 @@ form div {
 
 #groceries-container {
   display: flex;
-  margin: 15px;
-  padding-top: 10px;
+  margin: 0px 15px 15px 15px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
 #grocery-list-image-container {
   display: flex;
-  width: 150px;
-  height: 150px;
-  align-items: center;
+  width: 200px;
+  height: 200px;
   justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
 #grocery-list-image {
-  max-width: 150px;
+  max-width: 200px;
   max-height: 100%;
   object-fit: contain;
 }
 
 .grocery-item {
-  margin: 20px;
+  margin: 10px;
+  border: 2px solid black;
 }
 
 .checkout-button {
@@ -161,10 +185,22 @@ form div {
   flex-direction: column;
 }
 
+#quantity-container {
+  display: flex;
+  width: 80%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
 #quantity-field {
   font-size: 16px;
   text-align: center;
+  width: 30px;
+  margin: 0px 5px;
 }
+
 .cart-item {
   padding: 10px 20px;
 }
@@ -180,4 +216,27 @@ form div {
   align-items: center;
   background: black;
   color: white;
+}
+
+#checkout-button {
+  width: 100%;
+  background: teal;
+  color: white;
+  border: 0px;
+  cursor: pointer;
+  padding: 5px 0px;
+}
+
+#product-title {
+  width: 95%;
+  font-size: 2em;
+  margin-bottom: 0;
+  background-color: darkgrey;
+}
+
+#another-grocery-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
