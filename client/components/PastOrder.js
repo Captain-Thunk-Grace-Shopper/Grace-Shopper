@@ -8,7 +8,9 @@ const PastOrder = props => {
         <div key={item['order-item'].id}>
           {item.name}
           <br />
-          {item.price}
+          ${Math.floor(
+            item['order-item'].price * item['order-item'].quantity * 100
+          ) / 100}
         </div>
       ))}
     </div>

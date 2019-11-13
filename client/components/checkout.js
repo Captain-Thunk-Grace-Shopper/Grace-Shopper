@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addAddress} from '../store/user'
-import Cart from './cart'
 
 const INITIAL_STATE = {
   firstName: '',
@@ -39,7 +38,6 @@ class Checkout extends React.Component {
     return (
       <main>
         <div>
-          <Cart />
           <h3>Add Shipping Address </h3>
           <form onSubmit={this.handleClick}>
             <label>

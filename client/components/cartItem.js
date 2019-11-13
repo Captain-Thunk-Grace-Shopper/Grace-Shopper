@@ -25,7 +25,7 @@ class CartItem extends React.Component {
   }
 
   minus() {
-    if (this.state.quantity > 0) {
+    if (this.state.quantity >= 1) {
       this.props.update(
         this.props.item.cartItemId || this.props.item['order-item'].id,
         this.state.quantity - 1
@@ -48,41 +48,46 @@ class CartItem extends React.Component {
 
     return (
       <div className="cart-item">
-        {name}, Price: $ {price}
-        <br />
-        <div id="cart-quantity">
-          Qty:
-          <input
-            type="button"
-            value="-"
-            id="plus-minus"
-            className="button-minus"
-            onClick={this.minus}
-          />
-          <input
-            type="number"
-            name="quantity"
-            id="quantity-field"
-            value={this.state.quantity}
-            onChange={evt => this.setState({quantity: evt.target.value})}
-          />
-          <input
-            type="button"
-            value="+"
-            id="plus-minus"
-            className="button-plus"
-            onClick={this.plus}
-          />
-          <button
-            type="button"
-            id="delete-button"
-            onClick={() => {
-              this.props.delete(itemId)
-            }}
-          >
-            <i className="fas fa-trash-alt" />
-          </button>
+        <button
+          type="button"
+          id="delete-button"
+          onClick={() => {
+            this.props.delete(itemId)
+          }}
+        >
+          <i className="fas fa-trash-alt" />
+        </button>
+        <div id="order-item-body">
+          <b id="cart-item-name">{name}</b>
+          <br />
+          <div className="quantity buttons_added">
+            Qty:
+            <input
+              type="button"
+              value="-"
+              className="minus"
+              onClick={this.minus}
+            />
+            <input
+              type="number"
+              name="quantity"
+              id="quantity-field"
+              step="1"
+              min="1"
+              className="input-text qty text"
+              size="4"
+              value={this.state.quantity}
+              onChange={evt => this.setState({quantity: evt.target.value})}
+            />
+            <input
+              type="button"
+              value="+"
+              className="plus"
+              onClick={this.plus}
+            />
+          </div>
         </div>
+        ${price}
       </div>
     )
   }

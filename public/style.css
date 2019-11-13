@@ -21,6 +21,7 @@ button:focus {
   outline: none;
 }
 
+html,
 body {
   height: 100vh;
   padding: 0;
@@ -31,9 +32,10 @@ body {
 .app-container {
   margin: 0 auto;
   background-color: teal;
-  height: 100vh;
+  height: 100%;
   text-align: center;
   border: 1px solid black;
+  min-width: 650px;
 }
 
 #main-app-container {
@@ -117,8 +119,8 @@ form div {
   justify-content: space-evenly;
   text-align: center;
   align-content: center;
-  background-color: lightgrey;
-  padding: 20px;
+  background-color: lightgray;
+  padding: 20px 0px 20px 0px;
   margin-top: 0px;
 }
 
@@ -178,11 +180,15 @@ form div {
 }
 
 .cart-container {
+  min-width: 28%;
   flex-shrink: 0;
   order: 1;
-  background-color: lightgrey;
+  background-color: rgb(189, 214, 214);
   display: flex;
   flex-direction: column;
+  align-content: center;
+  height: 100%;
+  padding-bottom: 20px;
 }
 
 #quantity-container {
@@ -191,31 +197,58 @@ form div {
   text-align: center;
   align-items: center;
   justify-content: center;
-  margin: 10px;
+  margin: 0px 10px 10px 10px;
 }
 
 #quantity-field {
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   width: 30px;
   margin: 0px 5px;
 }
 
-.cart-item {
+#cart-items {
   padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #plus-minus {
-  margin: 5px;
-  font-size: 16px;
+  margin: 0px;
+  font-size: 100px;
 }
 
 #auth-form-container {
+  border-top: 1px solid black;
+  background: rgb(66, 66, 66);
+  color: white;
+  padding: 20px;
+}
+
+#auth-form-container > h2,
+#email-password,
+#email-google-buttons {
+  margin: 0px;
+  text-transform: uppercase;
+}
+
+#email-password {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
+}
+.submit-login {
+  padding: 15px;
   color: white;
+  background: teal;
+  border: 0px;
+}
+
+#email-google-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #checkout-button {
@@ -225,4 +258,71 @@ form div {
   border: 0px;
   cursor: pointer;
   padding: 5px 0px;
+}
+
+#grocery-list-name {
+  max-width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#price {
+  color: darkred;
+}
+
+#product-name {
+  padding-bottom: 0px;
+}
+
+#cart-hr {
+  width: 95%;
+  border: 1px solid black;
+  margin-bottom: 0px;
+}
+
+#cart-header {
+  margin-bottom: 5px;
+}
+
+.cart-item {
+  background: white;
+  padding: 10px;
+  margin: 5px;
+}
+
+#cart-item-hr {
+  border: 1px solid black;
+  width: 85%;
+}
+
+#total {
+  font-size: 30px;
+  padding-top: 10px;
+}
+
+#subtotal {
+  margin-bottom: 0px;
+}
+
+#delete-button {
+  float: right;
+  border: 0px;
+  cursor: pointer;
+  font-weight: 600;
+  background: white;
+}
+
+#order-item-body {
+  padding-top: 20px;
+}
+
+#cart-item-name {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.quantity {
+  display: inline-block;
 }
