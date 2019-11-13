@@ -27,7 +27,6 @@ class UserHome extends React.Component {
     }
     return (
       <div>
-        <h3>Welcome, {email}!</h3>
         <div className="past-orders-container">
           <h2>Past Orders</h2>
           <div id="individual-past-order">

@@ -58,7 +58,7 @@ router.put('/', async (req, res, next) => {
     //guest order
     if (!req.session.passport || !req.session.passport.user) {
       const order = await Order.create({
-        status: 'Submitted',
+        status: 'Complete',
         address: req.body.address,
         name: req.body.name
       })
@@ -71,7 +71,7 @@ router.put('/', async (req, res, next) => {
       existOrder.update({
         address: req.body.address,
         name: req.body.name,
-        status: 'Submitted'
+        status: 'Complete'
       })
       res.status(200).json(existOrder)
     }
