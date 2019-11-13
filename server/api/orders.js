@@ -59,6 +59,7 @@ router.put('/', async (req, res, next) => {
         address: req.body.address,
         name: req.body.name
       })
+      req.session.order = []
       res.status(201).json(order)
     } else {
       //user order update

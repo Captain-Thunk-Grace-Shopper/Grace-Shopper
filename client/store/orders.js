@@ -8,7 +8,7 @@ const GET_ORDERS = 'GET_ORDERS'
 const ADD_ORDER_ITEM = 'ADD_ORDER_ITEM'
 const REMOVE_ORDER_ITEM = 'REMOVE_ORDER_ITEM'
 const UPDATE_ORDER_ITEM = 'UPDATE_ORDER_ITEM'
-
+const CLOSE_OPEN_ORDER = 'CLOSE_OPEN_ORDER'
 /**
  * INITIAL STATE
  */
@@ -24,6 +24,7 @@ const removeFromOrderAction = orderItemId => ({
   orderItemId
 })
 const updateItemAction = orderItem => ({type: UPDATE_ORDER_ITEM, orderItem})
+const closeOrderAction = () => ({type: CLOSE_OPEN_ORDER})
 
 /**
  * THUNK CREATORS
@@ -75,17 +76,6 @@ export const removeFromOpenOrder = itemId => {
   }
 }
 
-// export const updateOpenOrder = (itemId, quantity) => {
-//   return async dispatch => {
-//     try {
-//       await axios.put(`/api/order-items/${itemId}`, {quantity})
-//       const {data} = await axios.get('/api/orders/openOrderProducts')
-//       dispatch(getOrdersAction(data))
-//     } catch (error) {
-//       console.log("couldn't update", error)
-//     }
-//   }
-// }
 export const updateOpenOrder = (itemId, quantity) => {
   return async dispatch => {
     try {
@@ -98,9 +88,10 @@ export const updateOpenOrder = (itemId, quantity) => {
 }
 
 export const closeOpenOrder = (address, name) => {
-  return async () => {
+  return async dispatch => {
     try {
       await axios.put(`/api/orders`, {address, name})
+      dispatch(closeOrderAction())
     } catch (error) {
       console.log(error)
     }
@@ -140,6 +131,8 @@ export default function(state = defaultOrders, action) {
         }
         return item
       })
+    case CLOSE_OPEN_ORDER:
+      return []
     default:
       return state
   }
