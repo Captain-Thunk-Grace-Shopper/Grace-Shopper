@@ -24,6 +24,9 @@ router.get('/openOrderProducts', async (req, res, next) => {
       //user cart
       const userId = req.session.passport.user
       const orders = await Order.findOpenCart(userId)
+      if (!orders.length) {
+        res.status(200)
+      }
       const allProducts = await orders.getProducts()
       res.json(allProducts)
     }
