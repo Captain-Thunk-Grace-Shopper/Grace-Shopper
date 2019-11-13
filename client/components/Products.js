@@ -27,18 +27,21 @@ class Products extends Component {
     const quantity = this.state.quantity
     const price = this.props.products.price
     return (
-      <div>
+      <div id="grocery-container-2">
         <Link to={`/products/${productId}`}>
           <div id="grocery-list-image-container">
             <img src={this.props.products.imgUrl} id="grocery-list-image" />
           </div>
           <div id="grocery-list-name">
             <p>
-              <b>{productName}</b>
+              <b>
+                {productName} | $ {this.props.products.price}
+              </b>
             </p>
           </div>
         </Link>
         <div id="quantity-container">
+          Qty:
           <input
             type="button"
             value="-"
@@ -48,6 +51,7 @@ class Products extends Component {
           <input
             type="number"
             name="quantity"
+            id="quantity-field"
             value={this.state.quantity}
             onChange={evt => this.setState({quantity: evt.target.value})}
           />
@@ -60,6 +64,7 @@ class Products extends Component {
         </div>
         <button
           type="button"
+          id="checkout-button"
           onClick={() => {
             this.props.addToCart(productName, quantity, price)
           }}
