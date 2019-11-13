@@ -226,17 +226,3 @@ form div {
   cursor: pointer;
   padding: 5px 0px;
 }
-
-#product-title {
-  width: 95%;
-  font-size: 2em;
-  margin-bottom: 0;
-  background-color: darkgrey;
-}
-
-#another-grocery-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
