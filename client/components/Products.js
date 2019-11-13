@@ -16,7 +16,7 @@ class Products extends Component {
   }
 
   minus() {
-    if (this.state.quantity > 0) {
+    if (this.state.quantity >= 1) {
       this.setState(previousState => ({quantity: previousState.quantity - 1}))
     }
   }
@@ -33,15 +33,15 @@ class Products extends Component {
             <img src={this.props.products.imgUrl} id="grocery-list-image" />
           </div>
           <div id="grocery-list-name">
-            <p>
+            <p id="product-name">
               <b>
-                {productName} | $ {this.props.products.price}
+                {productName} / <b id="price">${this.props.products.price}</b>
               </b>
             </p>
           </div>
         </Link>
         <div id="quantity-container">
-          Qty:
+          <b id="quantity-title">Qty:</b>
           <input
             type="button"
             value="-"
