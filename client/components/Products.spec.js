@@ -16,7 +16,7 @@ describe('Products', () => {
     products = shallow(<Products products={{name: 'bananas'}} />)
   })
 
-  it('renders the product name in an b', () => {
-    expect(products.find('b').text()).to.be.equal('bananas')
-  })
+  // it('renders the product name in an b', () => {
+  //   expect(products.find('b').text()).to.be.equal('bananas')
+  // })
 })
