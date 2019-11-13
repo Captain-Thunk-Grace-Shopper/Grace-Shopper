@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//get open cart
+//get open cart order items
 router.get('/openOrderProducts', async (req, res, next) => {
   try {
     //guest cart
