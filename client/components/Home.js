@@ -13,8 +13,8 @@ class Home extends React.Component {
       return <h1>Loading</h1>
     }
     return (
-      <div>
-        <h2>SuperMarket</h2>
+      <div id="another-grocery-div">
+        <h2 id="product-title">PRODUCTS</h2>
         <div id="groceries-container">
           <ul className="grocery-list">
             {this.props.products.map(product => (
