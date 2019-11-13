@@ -102,9 +102,9 @@ router.put('/:itemId', async (req, res, next) => {
       for (let i = 0; i < cart.length; i++) {
         if (cart[i].cartItemId === req.params.itemId) {
           cart[i].quantity = req.body.quantity
+          res.json(cart[i])
         }
       }
-      res.send('Item updated')
     } else {
       let order = await OrderItem.findOne({where: {id: req.params.itemId}})
       await order.update({quantity: req.body.quantity})

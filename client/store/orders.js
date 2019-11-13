@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {userInfo} from 'os'
 
 /**
  * ACTION TYPES
@@ -6,6 +7,7 @@ import axios from 'axios'
 const GET_ORDERS = 'GET_ORDERS'
 const ADD_ORDER_ITEM = 'ADD_ORDER_ITEM'
 const REMOVE_ORDER_ITEM = 'REMOVE_ORDER_ITEM'
+const UPDATE_ORDER_ITEM = 'UPDATE_ORDER_ITEM'
 
 /**
  * INITIAL STATE
@@ -21,6 +23,7 @@ const removeFromOrderAction = orderItemId => ({
   type: REMOVE_ORDER_ITEM,
   orderItemId
 })
+const updateItemAction = orderItem => ({type: UPDATE_ORDER_ITEM, orderItem})
 
 /**
  * THUNK CREATORS
@@ -43,21 +46,6 @@ export const getOpenOrder = () => async dispatch => {
   }
 }
 
-// export const addToOpenOrder = (
-//   productName,
-//   quantity,
-//   price
-// ) => async dispatch => {
-//   try {
-//     await axios.post('/api/order-items/', {name: productName, quantity, price})
-//     const res = await axios.get('/api/orders/openOrderProducts')
-//     dispatch(getOrdersAction(res.data))
-//   } catch (err) {
-//     console.log('Could not add order to cart')
-//     console.error(err)
-//   }
-// }
-
 export const addToOpenOrder = (
   productName,
   quantity,
@@ -76,26 +64,33 @@ export const addToOpenOrder = (
   }
 }
 
-// export const removeFromOpenOrder = itemId => {
-//   return async dispatch => {
-//     await axios.delete(`/api/order-items/${itemId}`)
-//     const {data} = await axios.get('/api/orders/openOrderProducts')
-//     dispatch(getOrdersAction(data))
-//   }
-// }
 export const removeFromOpenOrder = itemId => {
   return async dispatch => {
-    await axios.delete(`/api/order-items/${itemId}`)
-    dispatch(removeFromOrderAction(itemId))
+    try {
+      await axios.delete(`/api/order-items/${itemId}`)
+      dispatch(removeFromOrderAction(itemId))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
+// export const updateOpenOrder = (itemId, quantity) => {
+//   return async dispatch => {
+//     try {
+//       await axios.put(`/api/order-items/${itemId}`, {quantity})
+//       const {data} = await axios.get('/api/orders/openOrderProducts')
+//       dispatch(getOrdersAction(data))
+//     } catch (error) {
+//       console.log("couldn't update", error)
+//     }
+//   }
+// }
 export const updateOpenOrder = (itemId, quantity) => {
   return async dispatch => {
     try {
-      await axios.put(`/api/order-items/${itemId}`, {quantity})
-      const {data} = await axios.get('/api/orders/openOrderProducts')
-      dispatch(getOrdersAction(data))
+      const {data} = await axios.put(`/api/order-items/${itemId}`, {quantity})
+      dispatch(updateItemAction(data))
     } catch (error) {
       console.log("couldn't update", error)
     }
@@ -120,12 +115,31 @@ export default function(state = defaultOrders, action) {
     case GET_ORDERS:
       return action.orders
     case ADD_ORDER_ITEM:
-      return [...state, action.order]
+      return [...state, action.orderItem]
     case REMOVE_ORDER_ITEM:
-      let stateCopy = state.filter(item => {
-        return item.id !== action.orderItemId
+      return state.filter(item => {
+        //user
+        if (!item.cartItemId) {
+          return item['order-item'].id !== action.orderItemId
+        } else {
+          //guest
+          return item.cartItemId !== action.orderItemId
+        }
       })
-      return stateCopy
+    case UPDATE_ORDER_ITEM:
+      return state.map(item => {
+        //user
+        if (!item.cartItemId) {
+          if (item['order-item'].id === action.orderItem['order-item'].id) {
+            return action.orderItem
+          }
+        }
+        //guest
+        if (item.cartItemId === action.orderItem.cartItemId) {
+          return action.orderItem
+        }
+        return item
+      })
     default:
       return state
   }
